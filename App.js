@@ -111,6 +111,9 @@ export default function App() {
       edit: true,
     };
     setToDos(newToDos);
+    setTimeout(() => {
+      editInputRef.current.focus();
+    }, 100);
   };
 
   const editComplate = (key) => {
@@ -138,7 +141,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <View style={styles.header}>
         <TouchableOpacity onPress={work}>
           <Text
@@ -180,6 +183,7 @@ export default function App() {
                 <View key={key} style={styles.toDo}>
                   {toDos[key].edit ? (
                     <TextInput
+                      multiline
                       ref={editInputRef}
                       style={styles.editInput}
                       returnKeyType="done"
@@ -269,9 +273,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginBottom: 6,
     borderRadius: 15,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    alignItems: "flex-start",
   },
   toDoText: {
     color: "white",
@@ -282,6 +284,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
+    marginTop: 12,
   },
   empty: {
     flexDirection: "row",
@@ -297,10 +300,5 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "500",
-    borderWidth: 1,
-    borderColor: "#707070",
-    borderRadius: 5,
-    paddingHorizontal: 6,
-    paddingVertical: 6,
   },
 });
