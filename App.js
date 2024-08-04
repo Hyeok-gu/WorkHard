@@ -105,11 +105,21 @@ export default function App() {
 
   const editToDo = (key) => {
     const newToDos = { ...toDos };
-    setEditText(newToDos[key].text);
+
+    // 모든 항목의 edit 속성을 false로 설정
+    Object.keys(newToDos).forEach((k) => {
+      if (k !== key) {
+        newToDos[k].edit = false;
+      }
+    });
+
     newToDos[key] = {
       ...newToDos[key],
       edit: true,
     };
+
+    setEditText(newToDos[key].text);
+
     setToDos(newToDos);
     setTimeout(() => {
       editInputRef.current.focus();
